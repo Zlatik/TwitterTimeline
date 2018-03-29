@@ -1,0 +1,27 @@
+{
+  "name": "twittertimeline",
+  "version": "1.0.0",
+  "description": "NodeJS App using Express 4 and Twitter Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "web:node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zlatik/TwitterTimeline.git"
+  },
+  "keywords": [
+    "[twitter",
+    "node]"
+  ],
+  "author": "Svyatoslav Zlatous",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zlatik/TwitterTimeline/issues"
+  },
+  "homepage": "https://github.com/Zlatik/TwitterTimeline#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "twitter": "^1.7.1"
+  }
+}
