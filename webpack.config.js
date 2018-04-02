@@ -1,18 +1,12 @@
 const path = require("path");
 const webpack = require("webpack");
 module.exports = {
+    devtool:"source-map",
     entry: "./main.js",
     output:{
-        path:__dirname,
+        path:path.join(__dirname,"src"),
         filename:"bundle.js",
-    },
-
-    devServer:{
-        port:8080,
-        inline:false,
-        proxy:{
-            "proxy":`localhost:${process.env.port}`
-        }
+        publicPath:"/src/"
     },
     resolve:{
         extensions:['.js','.json','.css'],
@@ -39,9 +33,13 @@ module.exports = {
     plugins:[
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('production')
             }
-        })
+        }),
+        new webpack.LoaderOptionsPlugin({
+                minimize: true
+        }),
+        
     ]
 
 }

@@ -7,9 +7,8 @@
   "description": "NodeJS App using Express 4 and Twitter Api",
   "main": "index.js",
   "scripts": {
-    "test": "webpack-dev-server --hot",
-    "start": "concurrently --kill-others \"node index.js\" \"webpack-dev-server --hot\" ",
-    "run": "node index.js"
+    "build":"webpack --config ./webpack.config.js --progress --colors",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
