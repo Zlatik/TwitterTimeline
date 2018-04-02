@@ -1,11 +1,15 @@
 {
+  "engines": {
+    "node":"8.8.1"
+  },
   "name": "twittertimeline",
   "version": "1.0.0",
   "description": "NodeJS App using Express 4 and Twitter Api",
   "main": "index.js",
   "scripts": {
-    "test": "web:node index.js",
-    "start": "webpack-dev-server --hot"
+    "test": "webpack-dev-server --hot",
+    "start": "concurrently --kill-others \"node index.js\" \"webpack-dev-server --hot\" ",
+    "run": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "moment": "^2.22.0",
