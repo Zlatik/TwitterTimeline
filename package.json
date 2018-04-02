@@ -4,7 +4,8 @@
   "description": "NodeJS App using Express 4 and Twitter Api",
   "main": "index.js",
   "scripts": {
-    "test": "web:node index.js"
+    "test": "web:node index.js",
+    "start": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,22 @@
     "url": "https://github.com/Zlatik/TwitterTimeline/issues"
   },
   "homepage": "https://github.com/Zlatik/TwitterTimeline#readme",
+  "babel-core": "^6.26.0",
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
     "express": "^4.16.3",
-    "twitter": "^1.7.1"
+    "moment": "^2.22.0",
+    "react": "^16.3.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.3.0",
+    "style-loader": "^0.20.3",
+    "twitter": "^1.7.1",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
   }
 }

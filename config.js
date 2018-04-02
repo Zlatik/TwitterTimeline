@@ -1,7 +1,7 @@
 const config = {
-        consumer_key:"sIrwrYs5TVam5upiYqGPKp3q9",
-        consumer_secret:"raFmhScBEiYpdQMSOOH5842FOVF8BNpO28BiDOXmPCUeItQgnU",
-        access_token_key:"4629892395-iKCQWAu2igE5EVuqWras091D7jXcsyRrpiTlpJu",
-        access_token_secret:"FTXtHZ2BWu5KnHWFvbaROuEvR89SYyjOmKViTjU5gaqFA"
+        consumer_key:"",//provide your consumer key here
+        consumer_secret:"",//provide your consumer secret here
+        access_token_key:"",//provide your access token key here
+        access_token_secret:""//provide your access token secret here
 }
 module.exports = config;
