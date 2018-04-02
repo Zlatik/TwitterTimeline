@@ -11,7 +11,7 @@ module.exports = {
         port:8080,
         inline:false,
         proxy:{
-            "proxy":`0.0.0.0:${process.env.port}`
+            "proxy":`localhost:${process.env.port}`
         }
     },
     resolve:{
