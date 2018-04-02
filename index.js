@@ -10,12 +10,12 @@ const fs = require("fs");
 const index_path = path.join(__dirname,"./src/index.html");
 const publicPath = express.static(path.join(__dirname,'./src'));
 
-const options = {
-    key: fs.readFileSync('privateKey.key'),
-    cert: fs.readFileSync('certificate.crt')
-  };
+// const options = {
+//     key: fs.readFileSync('privateKey.key'),
+//     cert: fs.readFileSync('certificate.crt')
+//   };
 
-https.createServer(options, app).listen(process.env.PORT||4006);
+/*https.createServer(options, app)*/app.listen(process.env.PORT||4006);
 
 app.use('/public',publicPath);
 app.get("/",(req,res)=>{res.sendFile(index_path)})
