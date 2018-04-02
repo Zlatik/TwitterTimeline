@@ -1,3 +1,4 @@
+//styles for UserTweetsTable
 export default{
     TableStyle:{
        // marginLeft:"400px",

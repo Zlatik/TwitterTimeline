@@ -3,8 +3,10 @@ import {FormGroup} from "react-bootstrap";
 import {FormControl} from "react-bootstrap";
 import {ControlLabel} from "react-bootstrap";
 import {Button} from "react-bootstrap";
-import styles from "./UserInputStyle";
-class UserInputComponent extends React.Component{
+import styles from "./styles/UserInputStyle";
+
+//Form component with username input and submit button
+class UserInput extends React.Component{
     
     constructor(props) {
         super(props);
@@ -26,11 +28,11 @@ class UserInputComponent extends React.Component{
             </form>    
         )
     }
-
+    //handler for changing username value
     changeUser() {
        this.setState({username: this.textInput.value});
        this.props.onUserChanged(this.textInput.value);
     }
 }
 
-export default UserInputComponent;
+export default UserInput;

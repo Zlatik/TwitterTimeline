@@ -1,3 +1,4 @@
+//styles for UserInputComponent
 export default{
     FormStyle:{
         marginLeft:"391px",

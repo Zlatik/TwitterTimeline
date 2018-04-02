@@ -1,7 +1,7 @@
 import React from "react";
 import {Table} from "react-bootstrap";
 import moment from "moment";
-import TweetsStyle from "./UserTweetsStyle";
+import TweetsStyle from "./styles/UserTweetsStyle";
 class UserTweetsTable extends React.Component{
     constructor(props){
         super(props);
