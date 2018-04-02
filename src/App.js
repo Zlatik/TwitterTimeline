@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
-import UserInputComponent from "./UserInputComponent";
+import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
-
-class AppComponent extends React.Component {
+//class for merging userInput and UserTweetsTableTogether
+class App extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,6 +12,7 @@ class AppComponent extends React.Component {
             tweets: []
         };
     }
+    
     componentWillMount(){
         document.body.style.margin = 0;
         document.body.style.padding = 0;
@@ -30,7 +31,7 @@ class AppComponent extends React.Component {
             </div>
         )
     }
-
+    //handling username changing and sending request to our api via axios
     handleUserChanged(userName) {
         console.log(userName);
         axios.get(`http://localhost:4006/user/${userName}/tweets`)
@@ -43,4 +44,4 @@ class AppComponent extends React.Component {
     }
 }
 
-export default AppComponent;
+export default App;

@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build":"webpack --config ./webpack.config.js --progress --colors",
-    "start": "node index.js"
+    "start": "node ./server/index.js"
   },
   "repository": {
     "type": "git",
