@@ -6,7 +6,7 @@ const twitter = require("twitter");
 const config = require("../configs/tweeterConfig");
 const client = new twitter(config);
 const path = require("path");
-const favicon = require("serve-favicon");
+
 
 //pathes to files
 const index_path = path.join(__dirname,"../src/index.html");

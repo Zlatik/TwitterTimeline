@@ -7,7 +7,6 @@ module.exports = {
     output:{
         path:path.join(__dirname,"../src"),
         filename:"bundle.js",
-        publicPath:"/src/"
     },
     resolve:{
         extensions:['.js','.json','.css'],
@@ -29,10 +28,8 @@ module.exports = {
                     modules: true
                 }
             },
-            {
-                test:/\.ico?$/,
-                loader:"file-loader"
-            }
+            
+    
         ]
     },
     plugins:[
