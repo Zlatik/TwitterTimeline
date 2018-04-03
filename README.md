@@ -13,3 +13,4 @@ Step 3.Open your browser and go to http://localhost:4006.
 There you will find User Input at the top of the page.You have to fill in with twitter nickname(your or your friend,it doesn't matter) and 
 then click the "find tweets". You will see all the tweets in the block below.
 If you want to check if the app has been deployed to heroku please visit http://powerful-scrubland-16464.herokuapp.com (please use http protocol not https while there were troubles with ssl,so i left http protocol).
+Use "npm run build" for starting webpack build.
