@@ -1,10 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
+
 module.exports = {
     devtool:"source-map",
     entry: "./main.js",
     output:{
-        path:path.join(__dirname,"src"),
+        path:path.join(__dirname,"../src"),
         filename:"bundle.js",
         publicPath:"/src/"
     },
@@ -27,6 +28,10 @@ module.exports = {
                 query: {
                     modules: true
                 }
+            },
+            {
+                test:/\.ico?$/,
+                loader:"file-loader"
             }
         ]
     },

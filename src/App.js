@@ -18,6 +18,7 @@ class App extends React.Component {
         document.body.style.padding = 0;
         document.body.style.background = "linear-gradient(to top,lightgray,white)";
         document.body.style.height = "625px";
+        
     }
     componentWillUnmount(){
        document.body.style.background = null;  
@@ -26,7 +27,7 @@ class App extends React.Component {
     render(){
         return(
             <div className="wrapper">
-                <UserInputComponent onUserChanged={this.handleUserChanged}/>
+                <UserInput onUserChanged={this.handleUserChanged}/>
                 <UserTweetsTable tweets={this.state.tweets}/>
             </div>
         )
