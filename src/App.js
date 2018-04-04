@@ -13,7 +13,7 @@ class App extends React.Component {
         };
     }
     
-    componentWillMount(){
+    componentDidMount(){
         document.body.style.margin = 0;
         document.body.style.padding = 0;
         document.body.style.background = "linear-gradient(to top,lightgray,white)";
