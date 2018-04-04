@@ -42,14 +42,13 @@ app.all("*",function(req, res, next) {
 app.get("/user/:id/tweets",(req,res)=>{
     var id = req.params.id;
     //use tweeter api to find user tweets timeline
-    client.get("/statuses/user_timeline",{screen_name:id},(err,tweets)=>{
-        if(err){
-            throw err;
-        }
-        else{
+    client.get("/statuses/user_timeline",{screen_name:id})
+        .then((tweets)=>{
             res.json(tweets);
-        }
-    })      
+        })
+        .catch((err)=>{
+            throw err;
+        })      
 })
 
 module.exports = server;

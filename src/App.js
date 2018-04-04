@@ -35,6 +35,7 @@ class App extends React.Component {
     //handling username changing and sending request to our api via axios
     handleUserChanged(userName) {
         console.log(userName);
+        axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'PATCH, DELETE, POST, GET, OPTIONS';
         axios.get(`http://localhost:4006/user/${userName}/tweets`)
             .then((response) => {
                 this.setState({tweets:response.data});
