@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
+
 //class for merging userInput and UserTweetsTableTogether
 class App extends React.Component {
 
