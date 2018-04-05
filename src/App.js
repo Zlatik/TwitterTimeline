@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
+
 //class for merging userInput and UserTweetsTableTogether
 class App extends React.Component {
 
@@ -13,7 +14,7 @@ class App extends React.Component {
         };
     }
     
-    componentWillMount(){
+    componentDidMount(){
         document.body.style.margin = 0;
         document.body.style.padding = 0;
         document.body.style.background = "linear-gradient(to top,lightgray,white)";
@@ -35,7 +36,10 @@ class App extends React.Component {
     //handling username changing and sending request to our api via axios
     handleUserChanged(userName) {
         console.log(userName);
-        axios.get(`http://localhost:4006/user/${userName}/tweets`)
+
+        axios.get(`/user/${userName}/tweets`,{headers: {
+            'Access-Control-Allow-Origin': '*',
+          }})
             .then((response) => {
                 this.setState({tweets:response.data});
         })
