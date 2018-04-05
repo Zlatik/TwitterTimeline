@@ -37,7 +37,9 @@ class App extends React.Component {
     handleUserChanged(userName) {
         console.log(userName);
 
+
         axios.get(`/user/${userName}/tweets`,{headers: {
+
             'Access-Control-Allow-Origin': '*',
           }})
             .then((response) => {
