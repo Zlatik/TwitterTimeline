@@ -11,7 +11,9 @@ class UserInput extends React.Component{
     constructor(props) {
         super(props);
         this.changeUser = this.changeUser.bind(this);
-        this.state = { username: "" }
+        this.searchByHashtag = this.searchByHashtag.bind(this);
+        
+        this.state = { username: "",hashtag:"" }
     }
 
     render(){
@@ -24,6 +26,12 @@ class UserInput extends React.Component{
                         type="text"
                         name="userInput"/> 
                     <Button style = {styles.ButtonStyle} onClick={this.changeUser}>Find Tweets</Button>
+                    <FormControl 
+                        style = {styles.InputStyle}
+                        inputRef={hash => this.HashInput = hash} 
+                        type="text"
+                        name="hashtag"/> 
+                    <Button style = {styles.ButtonStyle} onClick={this.searchByHashtag}>Find hashtag</Button>
                 </FormGroup>
             </form>    
         )
@@ -32,6 +40,10 @@ class UserInput extends React.Component{
     changeUser() {
        this.setState({username: this.textInput.value});
        this.props.onUserChanged(this.textInput.value);
+    }
+    searchByHashtag(){
+        this.setState({hashtag: this.HashInput.value});
+        this.props.onHashtagSearch(this.HashInput.value);
     }
 }
 

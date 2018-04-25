@@ -49,6 +49,18 @@ app.get("/user/:id/tweets",(req,res)=>{
         .catch((err)=>{
             throw err;
         })      
+});
+
+app.get("/hashtag/:name/tweets",(req,res)=>{
+    var name = req.params.name;
+   
+    client.get("/search/tweets",{q:name,count:50})
+    .then((tweets)=>{
+        res.json(tweets["statuses"]);
+    })
+    .catch((err)=>{
+        throw err;
+    }) 
 })
 
 module.exports = server;

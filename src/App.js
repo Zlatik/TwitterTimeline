@@ -9,6 +9,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.handleUserChanged = this.handleUserChanged.bind(this);
+        this.handleHashtagSearch = this.handleHashtagSearch.bind(this);
         this.state = {
             tweets: []
         };
@@ -28,7 +29,7 @@ class App extends React.Component {
     render(){
         return(
             <div className="wrapper">
-                <UserInput onUserChanged={this.handleUserChanged}/>
+                <UserInput onUserChanged={this.handleUserChanged} onHashtagSearch={this.handleHashtagSearch}/>
                 <UserTweetsTable tweets={this.state.tweets}/>
             </div>
         )
@@ -39,6 +40,22 @@ class App extends React.Component {
 
 
         axios.get(`/user/${userName}/tweets`,{headers: {
+
+            'Access-Control-Allow-Origin': '*',
+          }})
+            .then((response) => {
+                this.setState({tweets:response.data});
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    handleHashtagSearch(hashtag) {
+        console.log(hashtag);
+
+
+        axios.get(`/hashtag/${hashtag}/tweets`,{headers: {
 
             'Access-Control-Allow-Origin': '*',
           }})
