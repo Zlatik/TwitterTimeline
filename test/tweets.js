@@ -7,6 +7,27 @@ let should = chai.should();
 const username = "zlatik1696";
 chai.use(chaiHttp);
 
+const mock ={
+    "created_at":"Mon Dec 25 08:52:53 +0000 2017",
+    "id":945215760653275100,
+    "id_str": "945215760653275136",
+    "text": "I'm learning how to #code with @javvy_app: whenever, wherever! ☕️ https://t.co/do6jvyrWPQ #java #androiddev",
+    "truncated": false,
+    "user": {
+        "id": 4629892395,
+        "id_str": "4629892395",
+        "name": "Sviatoslav",
+        "screen_name": "zlatik1696",
+        "location": "",
+        "description": "",
+        "url": null,
+        "entities": {
+            "description": {
+                "urls": []
+            }
+        }
+    }
+}
 describe('/GET tweets', () => {
     it('it should GET all tweets with username zlatk1696', (done) => {
       chai.request(server)
@@ -15,12 +36,12 @@ describe('/GET tweets', () => {
               res.should.have.status(200);
               res.should.be.json;
               res.body.should.be.a('array');
-              res.body[0].should.have.property("created_at");
-              res.body[0].should.have.property("id");
-              res.body[0].should.have.property("id_str");
-              res.body[0].should.have.property("text");
-              res.body[0].should.have.property("truncated");
-              res.body[0].should.have.deep.property("user.screen_name","zlatik1696");
+              res.body[0].should.have.property("created_at",mock["created_at"]);
+              res.body[0].should.have.property("id",mock["id"]);
+              res.body[0].should.have.property("id_str",mock["id_str"]);
+              res.body[0].should.have.property("text",mock["text"]);
+              res.body[0].should.have.property("truncated",mock["truncated"]);
+              res.body[0].should.have.deep.property("user.screen_name",username);
             done();
           });
     });

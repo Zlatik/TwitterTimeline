@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
+import Header from "./Header";
+import LoginForm from "./LoginForm";
 
 //class for merging userInput and UserTweetsTableTogether
 class App extends React.Component {
@@ -10,16 +12,22 @@ class App extends React.Component {
         super(props);
         this.handleUserChanged = this.handleUserChanged.bind(this);
         this.handleHashtagSearch = this.handleHashtagSearch.bind(this);
+        this.handleFilterActive = this.handleFilterActive.bind(this);
+        this.handleLoginActive = this.handleLoginActive.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            tweets: []
+            tweets: [],
+            isOpenLogin: false,
+            isOpenFilter: false,
+            isOpenTable: true
         };
     }
     
     componentDidMount(){
-        document.body.style.margin = 0;
-        document.body.style.padding = 0;
+        document.body.style.margin = "0px";
+        document.body.style.padding = "0px";
         document.body.style.background = "linear-gradient(to top,lightgray,white)";
-        document.body.style.height = "625px";
+        document.body.style.height = "621px";
         
     }
     componentWillUnmount(){
@@ -27,15 +35,20 @@ class App extends React.Component {
     }
 
     render(){
+        
         return(
-            <div className="wrapper">
-                <UserInput onUserChanged={this.handleUserChanged} onHashtagSearch={this.handleHashtagSearch}/>
-                <UserTweetsTable tweets={this.state.tweets}/>
+            <div>
+                <Header onLoginActive={this.handleLoginActive} onFilterActive={this.handleFilterActive}/>
+                <div className="wrapper">
+                    <UserInput activeUserInput={this.state.isOpenFilter} onUserChanged={this.handleUserChanged} onHashtagSearch={this.handleHashtagSearch}/>
+                    <LoginForm activeLoginForm={this.state.isOpenLogin} onUserDataSubmited={this.handleSubmit}/>
+                    <UserTweetsTable activeUserTable={this.state.isOpenTable} tweets={this.state.tweets}/>
+                </div>
             </div>
         )
     }
     //handling username changing and sending request to our api via axios
-    handleUserChanged(userName) {
+    handleUserChanged (userName){
         console.log(userName);
 
 
@@ -51,7 +64,7 @@ class App extends React.Component {
         });
     }
 
-    handleHashtagSearch(hashtag) {
+    handleHashtagSearch (hashtag){
         console.log(hashtag);
 
 
@@ -66,6 +79,26 @@ class App extends React.Component {
             console.log(error);
         });
     }
-}
 
+    handleLoginActive (){
+        this.setState({isOpenLogin: true});
+        this.setState({isOpenFilter: false});
+        this.setState({isOpenTable: false});
+        
+
+    }
+
+    handleFilterActive (){
+        this.setState({isOpenLogin: false});
+        this.setState({isOpenFilter: true});
+        this.setState({isOpenTable: true});
+    }
+
+    handleSubmit(){
+        this.setState({isOpenLogin: false});
+        this.setState({isOpenFilter: true});
+        this.setState({isOpenTable: true});
+
+    }
+}
 export default App;

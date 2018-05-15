@@ -12,7 +12,7 @@ const path = require("path");
 const index_path = path.join(__dirname,"../src/index.html");
 const public = express.static(path.join(__dirname,"../src"));
 //running server
-const server =app.listen(process.env.PORT||4006,()=>{
+const server = app.listen(process.env.PORT||4006,()=>{
     let host = server.address().address;
     let port = server.address().port;
 });

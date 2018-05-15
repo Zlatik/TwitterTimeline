@@ -9,6 +9,9 @@ class UserTweetsTable extends React.Component{
     
     render(){
         const tweetItems = this.props.tweets;
+        if(!this.props.activeUserTable){
+            return null;
+        }
 
         return(
             <div style={TweetsStyle.TableWrapperStyle}>

@@ -17,6 +17,9 @@ class UserInput extends React.Component{
     }
 
     render(){
+        if(!this.props.activeUserInput){
+            return null;
+        }
         return(
             <form style = {styles.FormStyle}>
                 <FormGroup >
