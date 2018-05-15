@@ -4,6 +4,7 @@ import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
 import Header from "./Header";
 import LoginForm from "./LoginForm";
+import MessageBox from "./MessageBox";
 
 //class for merging userInput and UserTweetsTableTogether
 class App extends React.Component {
@@ -15,11 +16,15 @@ class App extends React.Component {
         this.handleFilterActive = this.handleFilterActive.bind(this);
         this.handleLoginActive = this.handleLoginActive.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleMessageActive = this.handleMessageActive.bind(this);
+        this.handleSendingData = this.handleSendingData.bind(this);
         this.state = {
+            text:"",
             tweets: [],
             isOpenLogin: false,
             isOpenFilter: false,
-            isOpenTable: true
+            isOpenTable: true,
+            isOpenMessage: false
         };
     }
     
@@ -38,14 +43,27 @@ class App extends React.Component {
         
         return(
             <div>
-                <Header onLoginActive={this.handleLoginActive} onFilterActive={this.handleFilterActive}/>
+                <Header onLoginActive={this.handleLoginActive} onFilterActive={this.handleFilterActive} onMessageActive={this.handleMessageActive}/>
                 <div className="wrapper">
+                    <MessageBox activateMessageBox={this.state.isOpenMessage} onSendData={this.handleSendingData} />
                     <UserInput activeUserInput={this.state.isOpenFilter} onUserChanged={this.handleUserChanged} onHashtagSearch={this.handleHashtagSearch}/>
                     <LoginForm activeLoginForm={this.state.isOpenLogin} onUserDataSubmited={this.handleSubmit}/>
                     <UserTweetsTable activeUserTable={this.state.isOpenTable} tweets={this.state.tweets}/>
                 </div>
             </div>
         )
+    }
+    
+    handleSendingData (text){
+        console.log(text);
+
+        axios.post(`/user/tweets`,{
+            text:text
+        }).then((response)=>{
+            console.log(response.data);
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
     //handling username changing and sending request to our api via axios
     handleUserChanged (userName){
@@ -59,7 +77,7 @@ class App extends React.Component {
             .then((response) => {
                 this.setState({tweets:response.data});
         })
-        .catch(function (error) {
+        .catch((error)=> {
             console.log(error);
         });
     }
@@ -84,21 +102,32 @@ class App extends React.Component {
         this.setState({isOpenLogin: true});
         this.setState({isOpenFilter: false});
         this.setState({isOpenTable: false});
-        
+        this.setState({isOpenMessage:false})
 
+    }
+
+    handleMessageActive(){
+        this.setState({isOpenLogin: false});
+        this.setState({isOpenFilter: false});
+        this.setState({isOpenTable: false});
+        this.setState({isOpenMessage:true});
     }
 
     handleFilterActive (){
         this.setState({isOpenLogin: false});
         this.setState({isOpenFilter: true});
         this.setState({isOpenTable: true});
+        this.setState({isOpenMessage:false});
     }
 
     handleSubmit(){
         this.setState({isOpenLogin: false});
-        this.setState({isOpenFilter: true});
-        this.setState({isOpenTable: true});
+        this.setState({isOpenFilter: false});
+        this.setState({isOpenTable: false});
+        this.setState({isOpenMessage:true});
 
     }
+
+
 }
 export default App;

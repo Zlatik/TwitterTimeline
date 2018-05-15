@@ -6,7 +6,10 @@ const twitter = require("twitter");
 const config = require("../configs/tweeterConfig");
 const client = new twitter(config);
 const path = require("path");
+const parser = require("body-parser");
+app.use(parser.json());
 
+app.use(parser.urlencoded({extended: true}));
 
 //pathes to files
 const index_path = path.join(__dirname,"../src/index.html");
@@ -50,6 +53,17 @@ app.get("/user/:id/tweets",(req,res)=>{
             throw err;
         })      
 });
+
+app.post("/user/tweets",(req,res)=>{
+    console.log(req.body);
+    client.post("/statuses/update",{status: req.body["text"]})
+    .then((tweets)=>{
+      console.log(tweets);
+    })
+    .catch((err)=>{
+      throw err;
+    })     
+})
 
 app.get("/hashtag/:name/tweets",(req,res)=>{
     var name = req.params.name;
