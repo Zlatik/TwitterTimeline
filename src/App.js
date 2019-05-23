@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
-import Header from "./Header";
-import LoginForm from "./LoginForm";
+import Header from "./Header"; 
 import MessageBox from "./MessageBox";
 
 //class for merging userInput and UserTweetsTableTogether
@@ -24,7 +23,8 @@ class App extends React.Component {
             isOpenLogin: false,
             isOpenFilter: false,
             isOpenTable: true,
-            isOpenMessage: false
+            isOpenMessage: false,
+           
         };
     }
     
@@ -47,7 +47,7 @@ class App extends React.Component {
                 <div className="wrapper">
                     <MessageBox activateMessageBox={this.state.isOpenMessage} onSendData={this.handleSendingData} />
                     <UserInput activeUserInput={this.state.isOpenFilter} onUserChanged={this.handleUserChanged} onHashtagSearch={this.handleHashtagSearch}/>
-                    <LoginForm activeLoginForm={this.state.isOpenLogin} onUserDataSubmited={this.handleSubmit}/>
+                
                     <UserTweetsTable activeUserTable={this.state.isOpenTable} tweets={this.state.tweets}/>
                 </div>
             </div>
@@ -63,7 +63,7 @@ class App extends React.Component {
             console.log(response.data);
         }).catch((err)=>{
             console.log(err);
-        })
+        });
     }
     //handling username changing and sending request to our api via axios
     handleUserChanged (userName){

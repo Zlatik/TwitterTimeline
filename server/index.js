@@ -7,9 +7,29 @@ const config = require("../configs/tweeterConfig");
 const client = new twitter(config);
 const path = require("path");
 const parser = require("body-parser");
-app.use(parser.json());
+const passport = require("passport");
+const passportConfig = require("../configs/passportConfig");
+const sessionConfig = require("../configs/sessionConfig");
+const expressSession = require("express-session");
+const TwitterStrategy = require("passport-twitter").Strategy;
+// const cookieParser = require("cookie-parser");
 
+let profilePhoto;
+app.use(parser.json());
+app.set('trust proxy', 1);
+// app.use(cookieParser);
 app.use(parser.urlencoded({extended: true}));
+
+
+passport.serializeUser(function(user, done) {
+    done(null, {username:user.username,userId:user.id,photo:user.photos[0]});
+    profilePhoto = user.photos[0];
+});
+
+passport.deserializeUser(function(user, done) {
+
+    done(null, user);
+});
 
 //pathes to files
 const index_path = path.join(__dirname,"../src/index.html");
@@ -20,8 +40,34 @@ const server = app.listen(process.env.PORT||4006,()=>{
     let port = server.address().port;
 });
 
+passport.use(new TwitterStrategy(
+    {
+        consumerKey:passportConfig.consumer_key,
+        consumerSecret:passportConfig.consumer_secret,
+        callbackURL:passportConfig.callback_url
+    },(token, tokenSecret, profile, cb)=>{
+    return cb(null, profile);
+})
+);
+
+app.use(expressSession({
+    secret:sessionConfig.secret,
+    resave:sessionConfig.resave,
+    secure:sessionConfig.secure,
+    saveUninitialized:true,
+    cookie:{
+        secure:false
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/public',public);
-app.get("/",(req,res)=>{res.sendFile(index_path)});
+app.get("/",(req,res)=>{
+res.cookie("userPhoto" , profilePhoto);    
+res.sendFile(index_path);
+console.log(req.cookies)});
 
 //route handler for "/bundle.js"
 app.get("/bundle.js",(req,res)=>{
@@ -36,9 +82,18 @@ app.get("/bundle.js.map",(req,res,next)=>{
 //providing cors headers
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials","true")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.get('/login', 
+    passport.authenticate('twitter',{session:true})
+);
+
+app.get('/oath/callback',
+  passport.authenticate('twitter', { successRedirect: '/',
+                                     failureRedirect: '/login' }));
 
 
 //route handler for finding user tweets by Username

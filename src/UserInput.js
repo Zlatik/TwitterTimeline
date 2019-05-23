@@ -1,7 +1,6 @@
 import React from "react";
 import {FormGroup} from "react-bootstrap";
 import {FormControl} from "react-bootstrap";
-import {ControlLabel} from "react-bootstrap";
 import {Button} from "react-bootstrap";
 import styles from "./styles/UserInputStyle";
 

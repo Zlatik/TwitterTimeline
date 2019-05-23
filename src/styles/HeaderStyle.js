@@ -16,5 +16,11 @@ export default {
         fontFamily:"monospace",
         fontSize:"22px"
 
+    },
+    photoStyle:{
+        marginLeft:"88%",
+        height:"32px",
+        weight:"38px"
     }
+    
 }
