@@ -1,6 +1,6 @@
 export default{
     formStyle:{
-        marginLeft:"415px",
+        marginLeft:"570px",
         height:"400px",
         border:"2px solid silver",
         width:"481px"

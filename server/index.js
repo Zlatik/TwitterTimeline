@@ -12,6 +12,7 @@ const passportConfig = require("../configs/passportConfig");
 const sessionConfig = require("../configs/sessionConfig");
 const expressSession = require("express-session");
 const TwitterStrategy = require("passport-twitter").Strategy;
+
 // const cookieParser = require("cookie-parser");
 
 let profilePhoto;
@@ -50,13 +51,16 @@ passport.use(new TwitterStrategy(
 })
 );
 
+
+
 app.use(expressSession({
     secret:sessionConfig.secret,
     resave:sessionConfig.resave,
     secure:sessionConfig.secure,
     saveUninitialized:true,
     cookie:{
-        secure:false
+        secure:false,
+        isAuthenticated:false
     }
 }));
 
@@ -64,10 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/public',public);
-app.get("/",(req,res)=>{
-res.cookie("userPhoto" , profilePhoto);    
-res.sendFile(index_path);
-console.log(req.cookies)});
+
 
 //route handler for "/bundle.js"
 app.get("/bundle.js",(req,res)=>{
@@ -90,10 +91,24 @@ app.use(function(req, res, next) {
 app.get('/login', 
     passport.authenticate('twitter',{session:true})
 );
-
-app.get('/oath/callback',
+app.use('/oath/callback',
   passport.authenticate('twitter', { successRedirect: '/',
                                      failureRedirect: '/login' }));
+
+ app.use((req,res,next)=>{
+     if(!req.isAuthenticated()){
+            res.redirect('/login');
+        }else{
+            next();
+        }
+});
+
+app.get("/",(req,res)=>{
+    res.cookie("userPhoto" , profilePhoto);    
+    res.sendFile(index_path)}
+);
+
+
 
 
 //route handler for finding user tweets by Username
@@ -102,6 +117,7 @@ app.get("/user/:id/tweets",(req,res)=>{
     //use tweeter api to find user tweets timeline
     client.get("/statuses/user_timeline",{screen_name:id})
         .then((tweets)=>{
+            console.log(tweets);
             res.json(tweets);
         })
         .catch((err)=>{
@@ -125,6 +141,7 @@ app.get("/hashtag/:name/tweets",(req,res)=>{
    
     client.get("/search/tweets",{q:name,count:50})
     .then((tweets)=>{
+        console.log(tweets);
         res.json(tweets["statuses"]);
     })
     .catch((err)=>{

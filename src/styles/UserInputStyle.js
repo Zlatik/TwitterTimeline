@@ -1,8 +1,9 @@
 //styles for UserInputComponent
 export default{
     FormStyle:{
-        marginLeft:"300px",
-        marginTop:"10px"
+        marginLeft:"480px",
+        marginTop:"10px",
+        width:"580px"
     },
     InputStyle:{
         borderRadius:"1px",

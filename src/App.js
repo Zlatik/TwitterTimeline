@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import UserInput from "./UserInput";
 import UserTweetsTable from "./UserTweetsTable";
 import Header from "./Header"; 
 import MessageBox from "./MessageBox";
+import ReactBootstrap from "react-bootstrap";
 
 //class for merging userInput and UserTweetsTableTogether
 class App extends React.Component {
@@ -24,15 +26,15 @@ class App extends React.Component {
             isOpenFilter: false,
             isOpenTable: true,
             isOpenMessage: false,
-           
+                
         };
     }
     
     componentDidMount(){
         document.body.style.margin = "0px";
         document.body.style.padding = "0px";
-        document.body.style.background = "linear-gradient(to top,lightgray,white)";
-        document.body.style.height = "621px";
+        // document.body.style.background = "linear-gradient(to top,lightgray,white)";
+        // document.body.style.height = "621px";
         
     }
     componentWillUnmount(){

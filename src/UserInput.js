@@ -22,18 +22,19 @@ class UserInput extends React.Component{
         return(
             <form style = {styles.FormStyle}>
                 <FormGroup >
+                    <div className="form-row mx-auto" width="10%">
                     <FormControl 
-                        style = {styles.InputStyle}
+                        
                         inputRef={input => this.textInput = input} 
                         type="text"
-                        name="userInput"/> 
-                    <Button style = {styles.ButtonStyle} onClick={this.changeUser}>Find Tweets</Button>
+                        name="userInput" className="col-ms-1"/> 
+                    <Button variant="primary" type="submit" onClick={this.changeUser}>Find Tweets</Button>
                     <FormControl 
-                        style = {styles.InputStyle}
                         inputRef={hash => this.HashInput = hash} 
                         type="text"
-                        name="hashtag"/> 
-                    <Button style = {styles.ButtonStyle} onClick={this.searchByHashtag}>Find hashtag</Button>
+                        name="hashtag" className = "col-ms-1"/> 
+                    <Button variant="primary" type="submit" onClick={this.searchByHashtag}>Find hashtag</Button>
+                    </div>
                 </FormGroup>
             </form>    
         )

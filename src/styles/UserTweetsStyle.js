@@ -8,7 +8,7 @@ export default{
         
     },
     TableWrapperStyle:{
-        marginLeft:"284px",
+        marginLeft:"429px",
         background:"lightgrey",
         borderRadius:"3px",
         height:"400px",

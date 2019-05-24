@@ -1,30 +1,40 @@
 import React from "react";
-import styles from "./styles/HeaderStyle"
-import Cookies from "react-cookies";
+import Cookies from "universal-cookie";
+import Navbar from "react-bootstrap/lib/Navbar";
+import Container from "reactstrap/lib/Container";
+import Image  from "react-bootstrap/lib/Image";
+import Button from "react-bootstrap/lib/Button";
+import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
+import NavbarBrand from "react-bootstrap/lib/NavbarBrand";
+
+
 
 
 class Header extends React.Component{
+     
     constructor(props){
         super(props);
-        this.activateLoginForm = this.activateLoginForm.bind(this);
+    //    this.pattern = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        //this.activateLoginForm = this.activateLoginForm.bind(this);
         this.activateFilterForm = this.activateFilterForm.bind(this);
         this.activateMessageBox = this.activateMessageBox.bind(this);
-        this.userPhoto = Cookies.load("userPhoto");
+        //this.loginAction = this.loginAction.bind(this);
+        const cookies = new Cookies();
+        this.userPhotoUrl = cookies.get('userPhoto').value;
     }
 
 
     render(){
         return(
-            <header style={styles.headerStyle}>
-                <nav>
-                    <ul style={styles.listStyle}>
-                        <li style={styles.liStyle}><a onClick={this.activateMessageBox}>Message</a></li>
-                        {/* <li style={styles.liStyle}><a onClick={this.activateLoginForm}>Login</a></li> */}
-                        <li style={styles.liStyle}><a onClick={this.activateFilterForm}>Filter</a></li>
-                        <li style={styles.liStyle} ><img src={this.userPhoto} style = {styles.photoStyle}></img></li>
-                    </ul>
-                </nav>
-            </header>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" height="5%">
+            
+                 <NavbarBrand href="#home" className = "col-sm-2">React-Bootstrap</NavbarBrand>
+                 <ButtonGroup className="col-sm-6" aria-label="First group">
+                    <Button variant="primary" onClick={this.activateMessageBox}>Message</Button>
+                    <Button variant="primary" onClick={this.activateFilterForm}>Seach</Button>
+                 </ButtonGroup>
+                    <Image src={this.userPhotoUrl} thumbnail className = "col-sm-1"/>                    
+            </Navbar>
         )
     }
 
@@ -32,16 +42,10 @@ class Header extends React.Component{
         this.props.onFilterActive();
     }
 
-    activateLoginForm(){
-        this.props.onLoginActive();
-    }
 
     activateMessageBox(){
         this.props.onMessageActive();
     }
-
-
-    
 }
 
 export default Header;
