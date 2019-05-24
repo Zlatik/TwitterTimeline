@@ -33,8 +33,6 @@ class App extends React.Component {
     componentDidMount(){
         document.body.style.margin = "0px";
         document.body.style.padding = "0px";
-        // document.body.style.background = "linear-gradient(to top,lightgray,white)";
-        // document.body.style.height = "621px";
         
     }
     componentWillUnmount(){
